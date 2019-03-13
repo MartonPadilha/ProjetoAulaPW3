@@ -12,27 +12,29 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.marton.entity.CursoEntity;
+import com.marton.entity.TurmaEntity;
 import com.marton.service.CursoService;
+import com.marton.service.TurmaService;
 
 @RestController
-@RequestMapping(value="/cursos")
-public class CursoResource {
+@RequestMapping(value="/turmas")
+public class TurmaResource {
 	
 	@Autowired
-	CursoService service;
+	TurmaService service;
 	
 	
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public List<CursoEntity> listar() {
+	public List<TurmaEntity> listar() {
 
-		List<CursoEntity> lista = service.bucar();
+		List<TurmaEntity> lista = service.bucar();
 		return lista;
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value="/{id}")
-	public ResponseEntity<CursoEntity> buscar(@PathVariable Integer id){
-		CursoEntity objeto = service.buscar(id);
+	public ResponseEntity<TurmaEntity> buscar(@PathVariable Integer id){
+		TurmaEntity objeto = service.buscar(id);
 		if (objeto == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		} 

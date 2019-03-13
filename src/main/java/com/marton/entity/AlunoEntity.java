@@ -8,98 +8,78 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
-public class CursoEntity implements Serializable {
+public class AlunoEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String nome;
-	private String nivel;
-	private String turno;
-	
-	
-	//@OneToMany(mappedBy="curso"), curso é a propriedade da classe relacionada
-	@OneToMany(mappedBy="curso")
-	private List<TurmaEntity> turmas = new ArrayList<>(); 
-	//coleções precisam ser inicializadas
-	
-	
-	public CursoEntity() {
+	private String nome, telefone, matricula, email;
+
+	@ManyToMany
+	@JoinTable(name="matricula", 
+		joinColumns = @JoinColumn(name = "alunos_id"),
+		inverseJoinColumns = @JoinColumn(name = "turma_id")
+			)
+	private List<TurmaEntity> turmas = new ArrayList<>();
+
+	public AlunoEntity() {
 		super();
 	}
 
-
-	public CursoEntity(Integer id, String nome, String nivel, String turno) {
+	public AlunoEntity(Integer id, String nome, String telefone, String matricula, String email) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.nivel = nivel;
-		this.turno = turno;
+		this.telefone = telefone;
+		this.matricula = matricula;
+		this.email = email;
 	}
 
-
-	
-	
 	public Integer getId() {
 		return id;
 	}
 
-
-	
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-
-	
 	public String getNome() {
-			return nome;
-		}
-	
-	
-		
+		return nome;
+	}
+
 	public void setNome(String nome) {
-			this.nome = nome;
-		}
-	
-	
-		
-	public String getNivel() {
-			return nivel;
-		}
-	
-	
-		
-	public void setNivel(String nivel) {
-			this.nivel = nivel;
-		}
-	
-	
-		
-	public String getTurno() {
-			return turno;
-		}
-	
-	
-		
-	public void setTurno(String turno) {
-			this.turno = turno;
-		}
-	
-	
-	public List<TurmaEntity> getTurmas() {
-		return turmas;
+		this.nome = nome;
 	}
 
-
-	public void setTurmas(List<TurmaEntity> turmas) {
-		this.turmas = turmas;
+	public String getTelefone() {
+		return telefone;
 	}
 
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getMatricula() {
+		return matricula;
+	}
+
+	public void setMatricula(String matricula) {
+		this.matricula = matricula;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	@Override
 	public int hashCode() {
@@ -109,7 +89,6 @@ public class CursoEntity implements Serializable {
 		return result;
 	}
 
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -118,7 +97,7 @@ public class CursoEntity implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CursoEntity other = (CursoEntity) obj;
+		AlunoEntity other = (AlunoEntity) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -126,7 +105,6 @@ public class CursoEntity implements Serializable {
 			return false;
 		return true;
 	}
-		
 	
 	
 }

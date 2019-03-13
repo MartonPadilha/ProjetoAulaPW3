@@ -11,28 +11,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.marton.entity.AlunoEntity;
 import com.marton.entity.CursoEntity;
+import com.marton.service.AlunoService;
 import com.marton.service.CursoService;
 
 @RestController
-@RequestMapping(value="/cursos")
-public class CursoResource {
+@RequestMapping(value="/alunos")
+public class AlunoResource {
 	
 	@Autowired
-	CursoService service;
+	AlunoService service;
 	
 	
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public List<CursoEntity> listar() {
+	public List<AlunoEntity> listar() {
 
-		List<CursoEntity> lista = service.bucar();
+		List<AlunoEntity> lista = service.bucar();
 		return lista;
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value="/{id}")
-	public ResponseEntity<CursoEntity> buscar(@PathVariable Integer id){
-		CursoEntity objeto = service.buscar(id);
+	public ResponseEntity<AlunoEntity> buscar(@PathVariable Integer id){
+		AlunoEntity objeto = service.buscar(id);
 		if (objeto == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		} 
