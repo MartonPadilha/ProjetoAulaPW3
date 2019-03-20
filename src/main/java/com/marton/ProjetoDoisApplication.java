@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.marton.dao.CursoDAO;
 import com.marton.dao.TurmaDAO;
 import com.marton.entity.CursoEntity;
+import com.marton.entity.ServidorEntity;
 import com.marton.entity.TurmaEntity;
 
 @SpringBootApplication
@@ -33,6 +34,8 @@ public class ProjetoDoisApplication implements CommandLineRunner{
 		TurmaEntity turma1 = new TurmaEntity(null, "Turma Formandos", 5, curso1);
 		TurmaEntity turma2 = new TurmaEntity(null, "Turma Nova", 1, curso1);
 		TurmaEntity turma3 = new TurmaEntity(null, "Turma", 1, curso2);
+		
+		ServidorEntity serv1 = new ServidorEntity(null, "Iffar", "iffar@edu.com", "123");
 		
 		curso1.getTurmas().addAll(Arrays.asList(turma1, turma2));
 		curso2.getTurmas().addAll(Arrays.asList(turma3));

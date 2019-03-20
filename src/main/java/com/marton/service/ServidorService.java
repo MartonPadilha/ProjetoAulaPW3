@@ -6,27 +6,27 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.marton.dao.CursoDAO;
-import com.marton.entity.CursoEntity;
+import com.marton.dao.ServidorDAO;
+import com.marton.entity.ServidorEntity;
 import com.marton.exceptions.ObjNaoEncontradoException;
 
 @Service
-public class CursoService {
+public class ServidorService {
 	
 	@Autowired
-	private CursoDAO dao;
+	private ServidorDAO dao;
 	
-	public List<CursoEntity> buscar() {
+	public List<ServidorEntity> buscar() {
 		return dao.findAll();
 	}
 	
-	public CursoEntity buscar(Integer id) {
-		Optional<CursoEntity> curso = dao.findById(id);
+	public ServidorEntity buscar(Integer id) {
+		Optional<ServidorEntity> curso = dao.findById(id);
 //		return curso.orElse(null);
 		return curso.orElseThrow(()-> new ObjNaoEncontradoException("Curso não encontrado!"));
 	}
 	
-	public CursoEntity salvar(CursoEntity obj) {
+	public ServidorEntity salvar(ServidorEntity obj) {
 		obj.setId(null);
 		return dao.save(obj);
 	}

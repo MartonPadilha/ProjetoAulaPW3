@@ -15,35 +15,35 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.marton.DTO.CursoDTO;
-import com.marton.entity.CursoEntity;
-import com.marton.service.CursoService;
+import com.marton.DTO.ServidorDTO;
+import com.marton.entity.ServidorEntity;
+import com.marton.service.ServidorService;
 
 @RestController
-@RequestMapping(value="/cursos")
-public class CursoResource {
+@RequestMapping(value="/servidores")
+public class ServidorResource {
 	
 	@Autowired
-	CursoService service;
+	ServidorService service;
 	
 	
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public List<CursoDTO> listar() {
-		List<CursoEntity> listaEntity = service.buscar();
+	public List<ServidorDTO> listar() {
+		List<ServidorEntity> listaEntity = service.buscar();
 		
-		List<CursoDTO> listaDTO = listaEntity.stream().map(obj -> new CursoDTO(obj)).collect(Collectors.toList());
+		List<ServidorDTO> listaDTO = listaEntity.stream().map(obj -> new ServidorDTO(obj)).collect(Collectors.toList());
 		return listaDTO;
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value="/{id}")
-	public ResponseEntity<CursoEntity> buscar(@PathVariable Integer id){
-		CursoEntity objeto = service.buscar(id);
+	public ResponseEntity<ServidorEntity> buscar(@PathVariable Integer id){
+		ServidorEntity objeto = service.buscar(id);
 		return ResponseEntity.ok(objeto);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> salvar(@RequestBody CursoEntity obj){
+	public ResponseEntity<Void> salvar(@RequestBody ServidorEntity obj){
 		obj = service.salvar(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		
