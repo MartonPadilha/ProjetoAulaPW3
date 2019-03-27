@@ -2,6 +2,10 @@ package com.marton.DTO;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
 import com.marton.entity.CursoEntity;
 import com.marton.entity.ServidorEntity;
 
@@ -9,7 +13,12 @@ public class ServidorDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
-	private String nome, email;
+	
+	@NotEmpty(message="Preenchimento Obrigatório!")
+	@Length(min=1, max=100, message="O nome deve conter entre 1 e 100 caracteres!")
+	private String nome; 
+	private String email;
+
 	
 	public ServidorDTO() {
 		super();
@@ -45,6 +54,9 @@ public class ServidorDTO implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	
+	
 
 	
 }
