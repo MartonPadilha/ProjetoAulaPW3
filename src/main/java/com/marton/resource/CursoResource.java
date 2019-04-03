@@ -75,13 +75,15 @@ public class CursoResource {
 	
 	@RequestMapping(value = "/paginacao", method = RequestMethod.GET)
 	public ResponseEntity<Page<CursoDTO>> listarPaginas(
+			
+			@RequestParam(value="nome", defaultValue="") String nome,
 			@RequestParam(value = "pagina", defaultValue = "0") Integer pagina, 
 			@RequestParam(value = "qtd", defaultValue = "15") Integer qtdLinhas, 
 			@RequestParam(value = "ordem", defaultValue = "nome") String orderBy, 
 			@RequestParam(value = "dir", defaultValue = "DESC") String dir){
 		
 		Page<CursoEntity> listaCursos = 
-				service.buscarPorPagina(pagina, qtdLinhas, orderBy, dir);
+				service.buscarPorPagina(nome, pagina, qtdLinhas, orderBy, dir);
 		
 		Page<CursoDTO> listaDTO = listaCursos.map(obj -> new CursoDTO(obj));
 		

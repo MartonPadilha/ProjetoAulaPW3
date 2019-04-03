@@ -25,7 +25,6 @@ public class CursoService {
 	
 	public CursoEntity buscar(Integer id) {
 		Optional<CursoEntity> curso = dao.findById(id);
-//		return curso.orElse(null);
 		return curso.orElseThrow(()-> new ObjNaoEncontradoException("Curso não encontrado!"));
 	}
 	
@@ -54,10 +53,11 @@ public class CursoService {
 		
 	}
 	
-	public Page<CursoEntity> buscarPorPagina(Integer pagina, Integer qtdLinhas, String orderBy, String dir){
+	public Page<CursoEntity> buscarPorPagina(String nome, Integer pagina, Integer qtdLinhas, String orderBy, String dir){
+		
 		PageRequest pageRequest = PageRequest.of(pagina, qtdLinhas, Direction.valueOf(dir), orderBy);
 		
-		return dao.findAll(pageRequest);
+		return dao.search(nome, pageRequest);
 	}
 
 	
